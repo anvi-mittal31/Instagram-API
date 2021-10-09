@@ -127,7 +127,7 @@ func GetPost(response http.ResponseWriter, request *http.Request) {
 	var LatestPosts []Post
 	collection := client.Database("InstagramPost").Collection("LatestPosts")
 	ctx, _ := context.WithTimeout(context.Background(), 30*time.Second)
-	cursor, err := collection.Find(ctx, bson.M{"postedTimestamp": time.Now()})
+	cursor, err := collection.Find(ctx, bson.M{})
 	if err != nil {
 		response.WriteHeader(http.StatusInternalServerError)
 		response.Write([]byte(`{ "message": "` + err.Error() + `" }`))
